@@ -1,6 +1,6 @@
 .cards {
   display: grid;
-  grid-template-columns: 445px 445px 445px;
+  grid-template-columns: repeat(auto-fill, 445px);
   gap: 20px;
   padding-bottom: 40px;
   margin-left: 80px;
@@ -14,8 +14,8 @@
 }
 
 .card__spots_image {
-  width: 445px;
-  max-height: 413px;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
 }
 
