@@ -1,0 +1,63 @@
+.cards {
+  display: grid;
+  grid-template-columns: 445px 445px 445px;
+  gap: 20px;
+  padding-bottom: 40px;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.card__spots {
+  display: flex;
+  flex-direction: column;
+  flex: cover;
+}
+
+.card__spots_image {
+  width: 445px;
+  max-height: 413px;
+  border-radius: 10px;
+}
+
+.card__spots_text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: #212121;
+  margin-top: 12px;
+  border: 0px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__spots_button {
+  opacity: 0.4;
+  border-style: none;
+}
+
+.card__spots_button:hover {
+  opacity: 1;
+}
+
+@media (max-width: 1320px) {
+  .cards__spots_image {
+    /* max-width: 300px applies to all screens below 1320px. */
+    max-width: 300px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 630px) {
+  .cards__spots_image {
+    /* display: flex and max-width: 300px are still set from above */
+    flex-direction: column;
+  }
+}
