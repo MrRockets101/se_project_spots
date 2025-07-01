@@ -6,6 +6,7 @@
   margin-bottom: 20px;
   margin-right: 80px;
   border-bottom: 1px solid #838383;
+  max-width: 100%;
 }
 
 .profile__avatar-section_image {

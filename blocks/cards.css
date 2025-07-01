@@ -53,5 +53,6 @@
   .card__spots_image {
     /* display: flex and max-width: 300px are still set from above */
     flex-direction: column;
+    justify-content: center;
   }
 }
