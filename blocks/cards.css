@@ -5,6 +5,7 @@
   padding-bottom: 40px;
   margin-left: 80px;
   margin-right: 80px;
+  max-width: 1400px;
 }
 
 .card__spots {
@@ -45,13 +46,6 @@
 
 .card__spots_button:hover {
   opacity: 1;
-}
-
-@media (max-width: 1320px) {
-  .card__spots_image {
-    /* max-width: 300px applies to all screens below 1320px. */
-    max-width: 300px;
-  }
 }
 
 /* Mobile */
