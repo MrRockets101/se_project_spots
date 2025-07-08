@@ -9,11 +9,11 @@
   max-width: 100%;
 }
 
-.profile__avatar-section_image {
+.profile__avatar {
   display: flex;
   margin-bottom: 20px;
 }
-.profile__avatar-text {
+.profile__content {
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -22,7 +22,7 @@
   justify-content: space-between;
 }
 
-.profile__avatar_name {
+.profile__title {
   font-style: normal;
   font-weight: 500;
   font-size: 32px;
@@ -31,7 +31,7 @@
   margin-bottom: 0px;
 }
 
-.profile__avatar_sub-text {
+.profile__sub-text {
   margin-top: 12px;
   border: 0px;
   font-style: normal;
@@ -40,13 +40,7 @@
   line-height: 100%;
 }
 
-.profile__avatar_buttons {
-  padding: 0px;
-  gap: 8px;
-  margin-top: auto;
-}
-
-.profile__button_edit {
+.profile__button-edit {
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -59,10 +53,10 @@
   opacity: 0.4;
 }
 
-.profile__button_edit:hover {
+.profile__button-edit:hover {
   opacity: 1;
 }
-.profile__button_post {
+.profile__button-post {
   display: flex;
   margin-top: auto;
   margin-left: auto;
@@ -85,33 +79,50 @@
   .profile {
     flex-direction: column;
     justify-content: center;
+    width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    margin-top: 0px;
   }
-}
 
-@media (max-width: 630px) {
-  .profile__avatar-main {
+  .profile__title {
+    margin-top: 0px;
+    margin-bottom: 6px;
+  }
+
+  .profile__content {
     flex-direction: column;
-    justify-content: center;
     margin: auto;
   }
-}
 
-@media (max-width: 630px) {
-  .profile__avatar_sub-text {
+  .profile__sub-text {
     display: flex;
     justify-content: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
   }
-}
 
-@media (max-width: 630px) {
-  .profile__button_edit {
+  .profile__button-edit {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 32px;
+    padding-bottom: 20px;
+  }
+
+  .profile__button-post {
+    padding-bottom: 20px;
+    width: 288px;
     margin-left: auto;
     margin-right: auto;
   }
-}
-@media (max-width: 630px) {
-  .profile__button_post {
+
+  .profile__avatar {
+    justify-content: center;
+    width: 80px;
+    height: 80px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 12px;
   }
 }
