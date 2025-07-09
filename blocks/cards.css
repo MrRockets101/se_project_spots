@@ -5,6 +5,7 @@
   padding-bottom: 40px;
   justify-content: center;
   max-width: 1400px;
+  margin: auto;
 }
 
 .card {
@@ -51,7 +52,7 @@
 }
 
 /* Mobile */
-@media (max-width: 630px) {
+@media (max-width: 480px) {
   .card__image {
     /* display: flex and max-width: 300px are still set from above */
     flex-direction: column;
@@ -63,6 +64,7 @@
 
   .cards {
     display: grid;
+    grid-template-columns: repeat(auto-fill, 288px);
     justify-content: center;
   }
 
