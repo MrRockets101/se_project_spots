@@ -32,6 +32,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 420px;
 }
 
 .profile__sub-text {
@@ -46,6 +47,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 420px;
 }
 
 .profile__button-edit {
@@ -59,6 +61,7 @@
   gap: 8px;
   color: #212121;
   opacity: 0.4;
+  cursor: pointer;
 }
 
 .profile__button-edit:hover {
@@ -77,6 +80,7 @@
   padding: 18px 0;
   justify-content: center;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .profile__button_post:hover {
@@ -116,6 +120,7 @@
     margin-right: auto;
     padding-top: 32px;
     padding-bottom: 20px;
+    cursor: pointer;
   }
 
   .profile__button-post {
@@ -123,6 +128,7 @@
     width: 288px;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
   }
 
   .profile__avatar {
