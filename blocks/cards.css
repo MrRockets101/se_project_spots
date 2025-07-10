@@ -4,8 +4,9 @@
   gap: 20px;
   padding-bottom: 40px;
   justify-content: center;
-  max-width: 1400px;
-  margin: auto;
+  max-width: 100%;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
 .card {
