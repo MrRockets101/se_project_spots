@@ -49,6 +49,7 @@ const newPostCaption = document.querySelector("#card-caption-input");
 const card = document.querySelector(".card");
 const cardImage = card.querySelector(".card__image");
 const cardText = card.querySelector(".card__text");
+const submitBtn = newPostModal.querySelector(".modal__submit-btn");
 
 newPostBtn.addEventListener("click", function () {
   newPostModal.classList.add("modal_is-opened");
@@ -114,4 +115,4 @@ function handleAddCardSubmit(evt) {
 }
 
 // Create the submit listener.
-addCardFormElement.addEventListener("submit", handleAddCardSubmit);
+submitBtn.addEventListener("submit", handleAddCardSubmit);
