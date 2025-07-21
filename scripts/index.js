@@ -44,6 +44,11 @@ const editProfileDesiptionInput = document.querySelector(
   "#profile-description-input"
 );
 const editProfileForm = editProfileModal.querySelector(".modal__form");
+const newPostInput = document.querySelector("#card-image-input");
+const newPostCaption = document.querySelector("#card-caption-input");
+const card = document.querySelector(".card");
+const cardImage = card.querySelector(".card__image");
+const cardText = card.querySelector(".card__text");
 
 newPostBtn.addEventListener("click", function () {
   newPostModal.classList.add("modal_is-opened");
@@ -93,3 +98,20 @@ function handleProfileFormSubmit(evt) {
     editProfileModal.classList.remove("modal_is-opened");
   });
 }
+
+// Create the form submission handler.
+function handleAddCardSubmit(evt) {
+  // Prevent default browser behavior.
+  evt.preventDefault();
+
+  // Log both input values to the console.
+  cardText.textContent = newPostInput.value;
+  cardImage.textContent = newPostCaption.value;
+  // Close the modal.
+  newPostBtn.addEventListener("click", function () {
+    newPostModal.classList.remove("modal_is-opened");
+  });
+}
+
+// Create the submit listener.
+addCardFormElement.addEventListener("submit", handleAddCardSubmit);
