@@ -34,17 +34,16 @@ const editProfileBtn = document.querySelector(".profile__button-edit");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
 
-editProfileBtn.addEventListener("click", function () {
-  editProfileModal.classList.add("modal_is-opened");
-});
-
-editProfileCloseBtn.addEventListener("click", function () {
-  editProfileModal.classList.remove("modal_is-opened");
-});
-
 const newPostBtn = document.querySelector(".profile__button-post");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
+const profileName = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__sub-text");
+const editProfileNameInput = document.querySelector("#profile-name-input");
+const editProfileDesiptionInput = document.querySelector(
+  "#profile-description-input"
+);
+const editProfileForm = editProfileModal.querySelector(".modal__form");
 
 newPostBtn.addEventListener("click", function () {
   newPostModal.classList.add("modal_is-opened");
@@ -58,3 +57,39 @@ initialCards.forEach(function (card) {
   console.log(card.name);
   console.log(card.link);
 });
+editProfileBtn.addEventListener("click", function () {
+  editProfileModal.classList.add("modal_is-opened");
+});
+
+editProfileCloseBtn.addEventListener("click", function () {
+  editProfileModal.classList.remove("modal_is-opened");
+});
+
+editProfileBtn.addEventListener("click", function () {
+  editProfileModal.classList.add("modal_is-open");
+  editProfileNameInput.value = profileName.textContent;
+});
+
+editProfileBtn.addEventListener("click", function () {
+  editProfileModal.classList.add("modal_is-open");
+  editProfileDesiptionInput.value = profileDescription.textContent;
+});
+
+// Create the form submission handler.
+function handleProfileFormSubmit(evt) {
+  // Prevent default browser behavior.
+  evt.preventDefault();
+
+  // Get the values of each form field from the value
+  // property of the corresponding input element.
+
+  // Insert these new values into the textContent
+  // property of the corresponding profile elements.
+  profileName.textContent = editProfileNameInput.value;
+  profileDescription.textContent = editProfileDesiptionInput.value;
+
+  // Close the modal.
+  editProfileCloseBtn.addEventListener("click", function () {
+    editProfileModal.classList.remove("modal_is-opened");
+  });
+}
