@@ -9,11 +9,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transition: 0s 0.5s 0.5s;
 }
 .modal_is-opened {
   visibility: visible;
   padding: 10px;
+  opacity: 1;
+  transition-delay: 0s;
 }
+
 .modal__container {
   max-width: 730px;
   width: 100%;
