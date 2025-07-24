@@ -52,12 +52,22 @@ const cardImage = card.querySelector(".card__image");
 const cardText = card.querySelector(".card__text");
 const submitBtn = newPostModal.querySelector(".modal__submit-btn");
 
+function openModal(modal) {
+  modal.classList.add("modal_is-opened");
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_is-opened");
+}
+
 newPostBtn.addEventListener("click", function () {
-  newPostModal.classList.add("modal_is-opened");
+  //newPostModal.classList.add("modal_is-opened");
+  openModal(newPostModal);
 });
 
 newPostCloseBtn.addEventListener("click", function () {
-  newPostModal.classList.remove("modal_is-opened");
+  //newPostModal.classList.remove("modal_is-opened");
+  closeModal(newPostModal);
 });
 
 initialCards.forEach(function (card) {
@@ -65,13 +75,15 @@ initialCards.forEach(function (card) {
   console.log(card.link);
 });
 editProfileBtn.addEventListener("click", function () {
-  editProfileModal.classList.add("modal_is-opened");
+  //editProfileModal.classList.add("modal_is-opened");
   editProfileDesiptionInput.value = profileDescription.textContent;
   editProfileNameInput.value = profileName.textContent;
+  openModal(editProfileModal);
 });
 
 editProfileCloseBtn.addEventListener("click", function () {
-  editProfileModal.classList.remove("modal_is-opened");
+  //editProfileModal.classList.remove("modal_is-opened");
+  closeModal(editProfileModal);
 });
 
 // Create the form submission handler.
@@ -88,7 +100,8 @@ function handleProfileFormSubmit(evt) {
   profileDescription.textContent = editProfileDesiptionInput.value;
 
   // Close the modal.
-  editProfileModal.classList.remove("modal_is-opened");
+  //editProfileModal.classList.remove("modal_is-opened");
+  closeModal(editProfileModal);
 }
 
 // Create the form submission handler.
@@ -103,7 +116,8 @@ function handleAddCardSubmit(evt) {
   console.log(newPostCaption.value);
   // Close the modal.
 
-  newPostModal.classList.remove("modal_is-opened");
+  //newPostModal.classList.remove("modal_is-opened");
+  closeModal(newPostModal);
 }
 
 // Create the submit listener.
