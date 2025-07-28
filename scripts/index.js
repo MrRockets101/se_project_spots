@@ -61,7 +61,7 @@ const modalImageContainer = modalPreview.querySelector(
   ".modal__image-container"
 );
 const modalClosePreview = modalPreview.querySelector(".modal__close_preview");
-const modalTitle = modalPreview.querySelector(".modal__title");
+const modalTitlePreview = modalPreview.querySelector(".modal__title-preview");
 const previewImage = modalPreview.querySelector("#preview__image");
 
 initialCards.forEach(function (item) {
@@ -85,14 +85,15 @@ function getCard(data) {
 
   const cardButtonDelete = card.querySelector(".card__button-delete");
   cardButtonDelete.addEventListener("click", function () {
-    cardButtonDelete.clesest(".card").remove();
+    cardButtonDelete.closest(".card").remove();
     card = null;
   });
 
   cardImage.addEventListener("click", function () {
-    previewImage.src = data.link;
-    modalTitle.alt = data.name;
     openModal(modalPreview);
+    previewImage.src = data.link;
+    previewImage.alt = data.name;
+    modalTitlePreview.textContent = data.name;
   });
 
   return card;
