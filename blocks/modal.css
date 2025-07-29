@@ -114,7 +114,7 @@
   opacity: 1;
   position: absolute;
   top: 0;
-  right: -77.5px;
+  right: -52.5px;
   background-color: none;
 }
 
@@ -147,6 +147,11 @@
   }
   .modal__image-container {
     padding: 0 16px;
+  }
+  .modal__close_preview {
+    position: absolute;
+    top: -52.5px;
+    right: 0px;
   }
 }
 @media screen and (max-width: 627px) {
