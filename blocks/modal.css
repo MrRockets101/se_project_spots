@@ -115,7 +115,8 @@
   position: absolute;
   top: 0;
   right: -52.5px;
-  background-color: none;
+  background-color: transparent;
+  border: none;
 }
 
 .modal__close_preview:hover {
@@ -148,15 +149,10 @@
   .modal__image-container {
     padding: 0 16px;
   }
-  .modal__close_preview {
-    position: absolute;
-    top: -52.5px;
-    right: 0px;
-  }
 }
 @media screen and (max-width: 627px) {
   .modal__close_preview {
-    top: -48px;
+    top: -52.5px;
     right: 0;
   }
 }
