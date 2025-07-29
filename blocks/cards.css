@@ -61,6 +61,11 @@
   border-style: none;
   background-color: transparent;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../images/like-Icon.png);
+  height: 23px;
+  width: 23px;
 }
 
 .card__button-like:hover {
@@ -70,9 +75,6 @@
 .card__button-like_clicked {
   opacity: 1;
   background-image: url(../images/Liked-icon-clicked.png);
-  border-style: none;
-  background-color: transparent;
-  cursor: pointer;
 }
 
 .card__button-like_clicked:hover {

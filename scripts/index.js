@@ -80,7 +80,7 @@ function getCard(data) {
 
   const cardButtonLike = card.querySelector(".card__button-like");
   cardButtonLike.addEventListener("click", function () {
-    cardButtonLike.classList.toggle(".card__button-like_clicked");
+    cardButtonLike.classList.toggle("card__button-like_clicked");
   });
 
   const cardButtonDelete = card.querySelector(".card__button-delete");
