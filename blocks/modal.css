@@ -56,8 +56,9 @@
   font-size: 20px;
   line-height: 120%;
   border-radius: 8px;
-  display: inline-block;
-  padding: 8px, 16px;
+  display: flex;
+  width: fit-content;
+  padding: 4px, 8px;
 }
 
 .modal__form {
@@ -102,7 +103,7 @@
   position: relative;
 }
 .modal__close_preview {
-  background-image: url(../images/modal-close-icon.png);
+  background-image: url(../images/close-icon.png);
   width: 40px;
   height: 40px;
   opacity: 1;
