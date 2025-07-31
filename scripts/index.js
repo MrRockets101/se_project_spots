@@ -64,9 +64,13 @@ const modalClosePreview = modalPreview.querySelector(".modal__close_preview");
 const modalTitlePreview = modalPreview.querySelector(".modal__title-preview");
 const previewImage = modalPreview.querySelector("#preview__image");
 
-initialCards.forEach(function (item) {
-  const card = getCard(item);
+function renderCard(data) {
+  const card = getCard(data);
   cards.append(card);
+}
+
+initialCards.forEach((item) => {
+  renderCard(item);
 });
 
 function getCard(data) {
@@ -86,7 +90,7 @@ function getCard(data) {
   const cardButtonDelete = card.querySelector(".card__button-delete");
   cardButtonDelete.addEventListener("click", function () {
     cardButtonDelete.closest(".card").remove();
-    card = null;
+    let card = null;
   });
 
   cardImage.addEventListener("click", function () {
@@ -162,8 +166,8 @@ function handleAddCardSubmit(evt) {
     name: newPostInput.value,
     link: newPostCaption.value,
   };
-  const card = getCard({ newPostValues });
-  cards.prepend(card);
+
+  renderCard(newPostValues);
   // Close the modal.
 
   //newPostModal.classList.remove("modal_is-opened");
