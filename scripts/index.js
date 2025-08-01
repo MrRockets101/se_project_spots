@@ -163,8 +163,8 @@ function handleAddCardSubmit(evt) {
 
   // Log both input values to the console.
   const newPostValues = {
-    name: newPostInput.value,
-    link: newPostCaption.value,
+    link: newPostInput.value,
+    name: newPostCaption.value,
   };
 
   renderCard(newPostValues);
