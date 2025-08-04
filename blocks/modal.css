@@ -143,6 +143,16 @@
   font-size: 16px;
   margin-top: 8px;
 }
+
+.modal__input_error-message {
+  border: 1px solid #ff000060;
+  /* when pasting it is #FF000099 but requires 60%, it is also rgba(255, 0, 0, 0.6)*/
+}
+
+.modal__submit-btn_disabled {
+  background-color: #212121;
+  color: #fcf5e5;
+}
 @media (max-width: 480px) {
   .modal__container {
     padding: 12px;
