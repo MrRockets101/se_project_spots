@@ -18,7 +18,7 @@ const showInputError = (form, input, errorMessage) => {
 const hideInputError = (form, input) => {
   const errorMessageID = input.id + "-error";
   const errorMessageText = form.querySelector("#" + errorMessageID);
-  errorMessageText.textContent = errorMessage;
+  errorMessageText.textContent = errorMessageText;
   // const errorMessageDisplay = formInput.querySelector(".modal__error");
   // errorMessageDisplay.textContent = errorMessageText;
   input.classList.remove(".modal__input_error-message");
@@ -34,14 +34,14 @@ const checkInputValidity = (form, input) => {
 
 const hasInvalidInput = (formInput) => {
   return formInput.some((inputContent) => {
-    return !iunput.validity.valid;
+    return !inputContent.validity.valid;
   });
 };
 const buttonDisabled = () => {
   buttonSubmit.disable = true;
 };
 const toggleButtonState = (formInput, buttonSubmit) => {
-  if ((hasInvalidInput = formInput)) {
+  if (hasInvalidInput(formInput)) {
     buttonDisabled(buttonSubmit);
     buttonSubmit.classList.add(".modal__submit-btn_disabled");
   } else {
@@ -59,15 +59,15 @@ const validationReset = (form, formInput) => {
 
 const setEventListeners = (form) => {
   //const form = document.querySelectorALL(".modal__form");
-  const Input = form(form.querySelectorAll(".modal__input"));
+  const inputs = Array.from(form.querySelectorAll(".modal__input"));
   const buttonSubmit = form.querySelector(".modal__submit-btn");
 
-  toggleButtonState = (formInput, buttonSubmit);
+  toggleButtonState(inputs, buttonSubmit);
 
-  formInput.forEach((input) => {
+  inputs.forEach((input) => {
     input.addEventListener("input", function () {
       checkInputValidity(form, input);
-      toggleButtonState(formInputinput, buttonSubmit);
+      toggleButtonState(formInput, input, buttonSubmit);
     });
   });
 };

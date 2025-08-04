@@ -47,7 +47,7 @@ const editProfileNameInput = document.querySelector("#profile-name-input");
 const editProfileDesiptionInput = document.querySelector(
   "#profile-description-input"
 );
-const form = ducument.querySelector(".modal__form");
+const form = document.querySelector(".modal__form");
 const newPostForm = newPostModal.querySelector(".modal__form");
 const editProfileForm = editProfileModal.querySelector(".modal__form");
 const newPostInput = document.querySelector("#card-image-input");
