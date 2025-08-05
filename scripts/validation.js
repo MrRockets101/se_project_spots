@@ -10,7 +10,7 @@
 const showInputError = (form, input, errorMessage) => {
   const errorMessageID = input.id + "-error";
   const errorMessageText = form.querySelector("#" + errorMessageID);
-  errorMessageText.textContent = "";
+  errorMessageText.textContent = errorMessage;
   // const errorMessageDisplay = formInput.querySelector(".modal__error");
   // errorMessageDisplay.textContent = errorMessageText;
   input.classList.add(".modal__input_error-message");
@@ -18,7 +18,7 @@ const showInputError = (form, input, errorMessage) => {
 const hideInputError = (form, input) => {
   const errorMessageID = input.id + "-error";
   const errorMessageText = form.querySelector("#" + errorMessageID);
-  errorMessageText.textContent = errorMessageText;
+  errorMessageText.textContent = "";
   // const errorMessageDisplay = formInput.querySelector(".modal__error");
   // errorMessageDisplay.textContent = errorMessageText;
   input.classList.remove(".modal__input_error-message");
@@ -26,7 +26,7 @@ const hideInputError = (form, input) => {
 
 const checkInputValidity = (form, input) => {
   if (!input.validity.valid) {
-    showInputError(form, input, input.valdidationMessage);
+    showInputError(form, input, input.validationMessage);
   } else {
     hideInputError(form, input);
   }
@@ -37,16 +37,16 @@ const hasInvalidInput = (formInput) => {
     return !inputContent.validity.valid;
   });
 };
-const buttonDisabled = () => {
-  buttonSubmit.disable = true;
+const buttonDisabled = (buttonSubmit) => {
+  buttonSubmit.disabled = true;
+  buttonSubmit.classList.add("modal__submit-btn_disabled");
 };
 const toggleButtonState = (formInput, buttonSubmit) => {
   if (hasInvalidInput(formInput)) {
     buttonDisabled(buttonSubmit);
-    buttonSubmit.classList.add(".modal__submit-btn_disabled");
   } else {
-    buttonSubmit.disable = false;
-    buttonSubmit.classList.remove(".modal__submit-btn_disabled");
+    buttonSubmit.disabled = false;
+    buttonSubmit.classList.remove("modal__submit-btn_disabled");
   }
 };
 
@@ -67,7 +67,7 @@ const setEventListeners = (form) => {
   inputs.forEach((input) => {
     input.addEventListener("input", function () {
       checkInputValidity(form, input);
-      toggleButtonState(formInput, input, buttonSubmit);
+      toggleButtonState(inputs, buttonSubmit);
     });
   });
 };

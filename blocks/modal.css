@@ -152,6 +152,7 @@
 .modal__submit-btn_disabled {
   background-color: #212121;
   color: #fcf5e5;
+  opacity: 0.4;
 }
 @media (max-width: 480px) {
   .modal__container {
