@@ -1,26 +1,22 @@
-// settings = {
-//  formSelector: ".modal__form",
-//  inputSelector: ".modal__input",
-//  submitButtonSelector: ".modal__button",
-//  inactiveButtonClass: "modal__button_disabled",
-//  inputErrorClass: "modal__input_type_error",
-//  errorClass: "modal__error_visible"
-//}
+settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__submit-btn",
+  inactiveButtonClass: "modal__submit-btn_disabled",
+  inputErrorClass: ".modal__input_error-message",
+  errorClass: ".modal__error",
+};
 
 const showInputError = (form, input, errorMessage) => {
   const errorMessageID = input.id + "-error";
   const errorMessageText = form.querySelector("#" + errorMessageID);
   errorMessageText.textContent = errorMessage;
-  // const errorMessageDisplay = formInput.querySelector(".modal__error");
-  // errorMessageDisplay.textContent = errorMessageText;
   input.classList.add(".modal__input_error-message");
 };
 const hideInputError = (form, input) => {
   const errorMessageID = input.id + "-error";
   const errorMessageText = form.querySelector("#" + errorMessageID);
   errorMessageText.textContent = "";
-  // const errorMessageDisplay = formInput.querySelector(".modal__error");
-  // errorMessageDisplay.textContent = errorMessageText;
   input.classList.remove(".modal__input_error-message");
 };
 
