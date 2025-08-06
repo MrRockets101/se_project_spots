@@ -103,83 +103,88 @@ function getCard(data) {
 
   return card;
 }
+newPostModal;
 
 modalClosePreview.addEventListener("click", function () {
   closeModal(modalPreview);
 });
+
+//testing start
+
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
+  document.addEventListener("keydown", handleEscapeKey, { once: true });
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
 }
 
+function handleEscapeKey() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal();
+  });
+}
+
 newPostBtn.addEventListener("click", function () {
-  //newPostModal.classList.add("modal_is-opened");
   openModal(newPostModal);
+
+  handleEscapeKey(newPostModal);
+
+  newPostModal.addEventListener("click", function (event) {
+    if (
+      event.target.matches(".modal__close-btn") ||
+      !event.target.closest(newPostModal)
+    ) {
+      closeModal(newPostModal);
+    }
+  });
 });
 
 newPostCloseBtn.addEventListener("click", function () {
-  //newPostModal.classList.remove("modal_is-opened");
   closeModal(newPostModal);
 });
 
 editProfileBtn.addEventListener("click", function () {
-  //editProfileModal.classList.add("modal_is-opened");
   editProfileDesiptionInput.value = profileDescription.textContent;
   editProfileNameInput.value = profileName.textContent;
-  validationReset(editProfileForm, [
-    editProfileNameInput,
-    editProfileDesiptionInput,
-  ]);
+  validationReset(
+    editProfileForm,
+    [editProfileNameInput, editProfileDesiptionInput],
+    settings
+  );
   openModal(editProfileModal);
+  const handleEscapeKey = document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal(editProfileModal);
+  });
 });
 
 editProfileCloseBtn.addEventListener("click", function () {
-  //editProfileModal.classList.remove("modal_is-opened");
   closeModal(editProfileModal);
 });
-
-// Create the form submission handler.
+//testing end
 function handleProfileFormSubmit(evt) {
-  // Prevent default browser behavior.
   evt.preventDefault();
-
-  // Get the values of each form field from the value
-  // property of the corresponding input element.
-
-  // Insert these new values into the textContent
-  // property of the corresponding profile elements.
   profileName.textContent = editProfileNameInput.value;
   profileDescription.textContent = editProfileDesiptionInput.value;
-
-  // Close the modal.
-  //editProfileModal.classList.remove("modal_is-opened");
   evt.target.reset();
-  buttonDisabled(buttonSubmit);
+  buttonDisabled(buttonSubmit, settings);
   closeModal(editProfileModal);
 }
 
-// Create the form submission handler.
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
 function handleAddCardSubmit(evt) {
-  // Prevent default browser behavior.
   evt.preventDefault();
 
-  // Log both input values to the console.
   const newPostValues = {
     link: newPostInput.value,
     name: newPostCaption.value,
   };
 
   renderCard(newPostValues);
-  // Close the modal.
 
-  //newPostModal.classList.remove("modal_is-opened");
   closeModal(newPostModal);
 }
 
-// Create the submit listener.
 newPostForm.addEventListener("submit", handleAddCardSubmit);
