@@ -109,32 +109,26 @@ modalClosePreview.addEventListener("click", function () {
   closeModal(modalPreview);
 });
 
-//testing start
-
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
-  document.addEventListener("keydown", handleEscapeKey, { once: true });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal(newPostModal, editProfileModal);
+  });
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
-}
-
-function handleEscapeKey() {
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal();
+  document.removeEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal(newPostModal, editProfileModal);
   });
 }
 
 newPostBtn.addEventListener("click", function () {
   openModal(newPostModal);
-
-  handleEscapeKey(newPostModal);
-
   newPostModal.addEventListener("click", function (event) {
     if (
       event.target.matches(".modal__close-btn") ||
-      !event.target.closest(newPostModal)
+      !event.target.closest(".modal__container")
     ) {
       closeModal(newPostModal);
     }
@@ -154,15 +148,20 @@ editProfileBtn.addEventListener("click", function () {
     settings
   );
   openModal(editProfileModal);
-  const handleEscapeKey = document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal(editProfileModal);
+  editProfileModal.addEventListener("click", function (event) {
+    if (
+      event.target.matches(".modal__close-btn") ||
+      !event.target.closest(".modal__container")
+    ) {
+      closeModal(editProfileModal);
+    }
   });
 });
 
 editProfileCloseBtn.addEventListener("click", function () {
   closeModal(editProfileModal);
 });
-//testing end
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = editProfileNameInput.value;
