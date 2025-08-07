@@ -109,18 +109,21 @@ modalClosePreview.addEventListener("click", function () {
   closeModal(modalPreview);
 });
 
+function handleEscapeKey(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_is-opened");
+    closeModal(openedModal);
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal(newPostModal, editProfileModal);
-  });
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
-  document.removeEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal(newPostModal, editProfileModal);
-  });
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 newPostBtn.addEventListener("click", function () {
