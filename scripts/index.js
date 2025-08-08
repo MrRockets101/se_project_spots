@@ -185,8 +185,8 @@ function handleAddCardSubmit(evt) {
   };
 
   renderCard(newPostValues);
-
-  closeModal(newPostModal);
+  evt.target.reset();
+  toggleButtonState(formInput, buttonSubmit, settings);
 }
 
 newPostForm.addEventListener("submit", handleAddCardSubmit);

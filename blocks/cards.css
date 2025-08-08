@@ -54,6 +54,9 @@
 
 .card__title {
   margin: 0px;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card__button-like {

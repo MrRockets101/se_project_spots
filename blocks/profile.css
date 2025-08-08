@@ -83,7 +83,7 @@
   cursor: pointer;
 }
 
-.profile__button_post:hover {
+.profile__button-post:hover {
   opacity: 0.4;
 }
 
