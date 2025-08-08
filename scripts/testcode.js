@@ -29,3 +29,15 @@ modals.forEach((modal) => {
       }
   });
 });
+
+modals.forEach((modal) => {
+  if (evt.target.classList.contains("modal_is-opened"))
+    document.addEventListener("keydown", handleEscapeKey);
+  modal.addEventListener("click", (evt) => {
+    if (
+      target.matches(".modal__close-btn") ||
+      target.closest(".modal__container")
+    )
+      closeModal(modal);
+  });
+});
