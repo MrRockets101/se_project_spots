@@ -17,7 +17,6 @@ function closeModal(modal) {
 const modals = document.querySelectorAll(".modal");
 
 modals.forEach((modal) => {
-  document.addEventListener("keydown", handleEscapeKey);
   modal.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("modal_is-opened"))
       if (
@@ -25,7 +24,6 @@ modals.forEach((modal) => {
         target.closest(".modal__container")
       ) {
         closeModal(modal);
-        document.removeEventListener("keydown", handleEscapeKey);
       }
   });
 });

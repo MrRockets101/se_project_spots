@@ -64,15 +64,7 @@ const modalImageContainer = modalPreview.querySelector(
 const modalClosePreview = modalPreview.querySelector(".modal__close_preview");
 const modalTitlePreview = modalPreview.querySelector(".modal__title-preview");
 const previewImage = modalPreview.querySelector("#preview__image");
-
-function renderCard(data) {
-  const card = getCard(data);
-  cards.append(card);
-}
-
-initialCards.forEach((item) => {
-  renderCard(item);
-});
+const modals = document.querySelectorAll(".modal");
 
 function getCard(data) {
   const card = cardTemplate.cloneNode(true);
@@ -103,19 +95,15 @@ function getCard(data) {
 
   return card;
 }
-newPostModal;
 
-modalClosePreview.addEventListener("click", function () {
-  closeModal(modalPreview);
-});
-
-function handleEscapeKey(event) {
-  if (event.key === "Escape") {
-    const openedModal = document.querySelector(".modal_is-opened");
-    closeModal(openedModal);
-  }
+function renderCard(data) {
+  const card = getCard(data);
+  cards.append(card);
 }
 
+initialCards.forEach((item) => {
+  renderCard(item);
+});
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
   document.addEventListener("keydown", handleEscapeKey);
@@ -125,17 +113,28 @@ function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
   document.removeEventListener("keydown", handleEscapeKey);
 }
+modalClosePreview.addEventListener("click", function () {
+  closeModal(modalPreview);
+  document.removeEventListener("keydown", handleEscapeKey);
+});
+
+function handleEscapeKey(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_is-opened");
+    closeModal(openedModal);
+  }
+}
+
+modals.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("modal_is-opened")) {
+      closeModal(modal);
+    }
+  });
+});
 
 newPostBtn.addEventListener("click", function () {
   openModal(newPostModal);
-  newPostModal.addEventListener("click", function (event) {
-    if (
-      event.target.matches(".modal__close-btn") ||
-      !event.target.closest(".modal__container")
-    ) {
-      closeModal(newPostModal);
-    }
-  });
 });
 
 newPostCloseBtn.addEventListener("click", function () {
@@ -143,26 +142,7 @@ newPostCloseBtn.addEventListener("click", function () {
 });
 
 editProfileBtn.addEventListener("click", function () {
-  editProfileDesiptionInput.value = profileDescription.textContent;
-  editProfileNameInput.value = profileName.textContent;
-  validationReset(
-    editProfileForm,
-    [editProfileNameInput, editProfileDesiptionInput],
-    settings
-  );
   openModal(editProfileModal);
-  editProfileModal.addEventListener("click", function (event) {
-    if (
-      event.target.matches(".modal__close-btn") ||
-      !event.target.closest(".modal__container")
-    ) {
-      closeModal(editProfileModal);
-    }
-  });
-});
-
-editProfileCloseBtn.addEventListener("click", function () {
-  closeModal(editProfileModal);
 });
 
 function handleProfileFormSubmit(evt) {
