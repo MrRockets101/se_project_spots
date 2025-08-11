@@ -1,3 +1,5 @@
+import { enableValidation, settings, validationReset } from "./validation.js";
+
 const initialCards = [
   {
     name: "Golden Gate Bridge",
@@ -177,3 +179,5 @@ function handleAddCardSubmit(evt) {
 }
 
 newPostForm.addEventListener("submit", handleAddCardSubmit);
+
+enableValidation(settings);
