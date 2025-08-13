@@ -12,7 +12,7 @@
       name="keywords"
       content="Alex Brosovich, web development, portfolio, design, programming"
     />
-    <link rel="stylesheet" href="./pages/index.css" />
+
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <title>Spots</title>
   </head>
@@ -21,7 +21,7 @@
       <header class="header">
         <img
           class="header__logo"
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="logo displaying spots"
         />
       </header>
@@ -29,7 +29,7 @@
         <section class="profile page__content">
           <img
             class="profile__avatar"
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="picture of avatar"
           />
           <div class="profile__content">
@@ -41,7 +41,7 @@
               <button class="profile__button-edit">
                 <img
                   class="profile__bottom profile__bottom_image"
-                  src="./images/edit-button.svg"
+                  src="<%=require('./images/edit-button.svg')%>"
                   alt="edit button icon"
                 />
                 Edit Profile
@@ -49,7 +49,10 @@
             </div>
           </div>
           <button class="profile__button-post">
-            <img src="./images/post-button.svg" alt="new post button" />
+            <img
+              src="<%=require('./images/post-button.svg')%>"
+              alt="new post button"
+            />
             New Post
           </button>
         </section>
@@ -155,6 +158,5 @@
         </div>
       </div>
     </div>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>

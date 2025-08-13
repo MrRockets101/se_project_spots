@@ -1,3 +1,4 @@
+import "./index.css";
 import {
   enableValidation,
   settings,
@@ -38,6 +39,13 @@ const initialCards = [
     name: "Mountain house",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
   },
+];
+
+const indexHtmlImages = [
+  { name: "picture of avatar" , "./images/avatar.jpg" },
+  { name: "logo displaying spots" , "/images/logo.svg" },
+  { name: "edit button icon" , "./images/edit-button.svg" },
+  { name: "new post button" , "./images/post-button.svg" },
 ];
 
 const editProfileBtn = document.querySelector(".profile__button-edit");
