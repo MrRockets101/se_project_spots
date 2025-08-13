@@ -41,12 +41,12 @@ const initialCards = [
   },
 ];
 
-const indexHtmlImages = [
-  { name: "picture of avatar" , "./images/avatar.jpg" },
-  { name: "logo displaying spots" , "/images/logo.svg" },
-  { name: "edit button icon" , "./images/edit-button.svg" },
-  { name: "new post button" , "./images/post-button.svg" },
-];
+//const indexHtmlImages = [
+//  { name: "picture of avatar" , "./images/avatar.jpg" },
+//  { name: "logo displaying spots" , "/images/logo.svg" },
+//  { name: "edit button icon" , "./images/edit-button.svg" },
+//  { name: "new post button" , "./images/post-button.svg" },
+//];
 
 const editProfileBtn = document.querySelector(".profile__button-edit");
 const editProfileModal = document.querySelector("#edit-profile-modal");
@@ -164,6 +164,10 @@ editProfileBtn.addEventListener("click", function () {
     editProfileNameInput,
     editProfileDesiptionInput,
   ]);
+});
+
+editProfileCloseBtn.addEventListener("click", function () {
+  closeModal(editProfileModal);
 });
 
 function handleProfileFormSubmit(evt) {
