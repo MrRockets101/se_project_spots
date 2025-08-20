@@ -1,9 +1,12 @@
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 413px);
+  justify-content: center;
+  grid-template-columns: repeat(
+    auto-fill,
+    413px
+  ); /*this is causing an issue with populating empty locations forcing cards to be off center */
   gap: 20px;
   padding-bottom: 40px;
-  justify-content: center;
 }
 
 .card {
