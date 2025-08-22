@@ -27,11 +27,19 @@
       </header>
       <main class="content">
         <section class="profile page__content">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="picture of avatar"
-          />
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-button">
+              <img
+                class="profile__avatar-edit"
+                src="<%=require('./images/edit-avatar-button.png')%>"
+              />
+            </button>
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/avatar.jpg')%>"
+              alt="picture of avatar"
+            />
+          </div>
           <div class="profile__content">
             <div class="profile__avatar-main">
               <h2 class="profile__title">Bessie Coleman</h2>

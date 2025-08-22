@@ -59,12 +59,14 @@ const api = new Api({
 });
 
 api
-  .getCard()
-  .then((arrayCards) => {
-    console.log(arrayCards);
+  .getAppInfo()
+  .then(([arrayCards, UserInfo]) => {
+    console.log(arrayCards, UserInfo);
     arrayCards.forEach((item) => {
       renderCard(item);
     });
+    profileName.textContent = UserInfo.name;
+    profileDescription.textContent = UserInfo.about;
   })
   .catch(console.error);
 
@@ -78,7 +80,7 @@ const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__sub-text");
 const editProfileNameInput = document.querySelector("#profile-name-input");
-const editProfileDesiptionInput = document.querySelector(
+const editProfileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const form = document.querySelector(".modal__form");
@@ -175,11 +177,11 @@ newPostCloseBtn.addEventListener("click", function () {
 
 editProfileBtn.addEventListener("click", function () {
   openModal(editProfileModal);
-  editProfileDesiptionInput.value = profileDescription.textContent;
+  editProfileDescriptionInput.value = profileDescription.textContent;
   editProfileNameInput.value = profileName.textContent;
   validationReset(editProfileForm, [
     editProfileNameInput,
-    editProfileDesiptionInput,
+    editProfileDescriptionInput,
   ]);
 });
 
@@ -189,11 +191,19 @@ editProfileCloseBtn.addEventListener("click", function () {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editProfileNameInput.value;
-  profileDescription.textContent = editProfileDesiptionInput.value;
-  evt.target.reset();
-  buttonDisabled(buttonSubmit, settings);
-  closeModal(editProfileModal);
+  api
+    .editUserInfo({
+      name: editProfileNameInput,
+      about: editProfileDescriptionInput,
+    })
+    .then((data) => {
+      profileName.textContent = editProfileNameInput.value;
+      profileDescription.textContent = editProfileDescriptionInput.value;
+      evt.target.reset();
+      buttonDisabled(buttonSubmit, settings);
+      closeModal(editProfileModal);
+    })
+    .catch(console.error);
 }
 
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
