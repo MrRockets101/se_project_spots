@@ -23,6 +23,9 @@
   justify-content: center;
   visibility: hidden;
 }
+.profile__avatar-button:hover {
+  cursor: pointer;
+}
 
 .profile__avatar-container:hover .profile__avatar-button {
   visibility: visible;
@@ -121,6 +124,7 @@
 
   .profile__avatar-button {
     visibility: visible;
+    border: none;
   }
 
   .profile__avatar-button::after {
@@ -130,6 +134,14 @@
   .profile__title {
     margin-top: 0px;
     margin-bottom: 6px;
+    display: flex;
+    justify-content: center;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    text-align: center;
+    color: #212121;
   }
 
   .profile__content {
@@ -142,6 +154,11 @@
     justify-content: center;
     margin-bottom: 0px;
     margin-top: 0px;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    color: #212121b2;
   }
 
   .profile__button-edit {

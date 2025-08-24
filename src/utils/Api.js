@@ -36,6 +36,16 @@ class Api {
       }),
     }).then(this._handleServerResponse);
   }
+  editAvatarInfo(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+
+      body: JSON.stringify({
+        avatar,
+      }),
+    }).then(this._handleServerResponse);
+  }
 }
 
 // GET https://around-api.en.tripleten-services.com/v1/users/me // also remember to pass the token

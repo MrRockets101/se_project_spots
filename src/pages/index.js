@@ -6,6 +6,7 @@ import {
 } from "../scripts/validation.js";
 
 import Api from "../utils/Api.js";
+import { data } from "autoprefixer";
 
 // const initialCards = [
 //   {
@@ -83,6 +84,7 @@ const editProfileNameInput = document.querySelector("#profile-name-input");
 const editProfileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+const profileAvatarButton = document.querySelector(".profile__avatar-button");
 const form = document.querySelector(".modal__form");
 const newPostForm = newPostModal.querySelector(".modal__form");
 const editProfileForm = editProfileModal.querySelector(".modal__form");
@@ -101,7 +103,13 @@ const modalClosePreview = modalPreview.querySelector(".modal__close_preview");
 const modalTitlePreview = modalPreview.querySelector(".modal__title-preview");
 const previewImage = modalPreview.querySelector("#preview__image");
 const modals = document.querySelectorAll(".modal");
-
+const editAvatarModal = document.querySelector("#edit-avatar-modal");
+const editAvatarCloseButton =
+  editAvatarModal.querySelector(".modal__close-btn");
+const profileAvatarInput = editAvatarModal.querySelector(
+  "#profile-avatar-input"
+);
+//const
 function getCard(data) {
   const card = cardTemplate.cloneNode(true);
   const cardText = card.querySelector(".card__title");
@@ -207,6 +215,29 @@ function handleProfileFormSubmit(evt) {
 }
 
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
+
+profileAvatarButton.addEventListener("click", function () {
+  openModal(editAvatarModal);
+});
+
+editAvatarCloseButton.addEventListener("click", function () {
+  closeModal(editAvatarModal);
+});
+
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  console.log(profileAvatarInput.value);
+  api
+    .editAvatarInfo(profileAvatarInput.value)
+    .then((data) => {
+      console.log(data);
+      profileAvatarInput.src = data.link;
+    })
+    // not sure if this is correct
+    .catch(console.error);
+}
+
+editAvatarModal.addEventListener("submit", handleAvatarSubmit);
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
