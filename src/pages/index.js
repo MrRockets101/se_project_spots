@@ -70,7 +70,7 @@ api
     profileDescription.textContent = UserInfo.about;
   })
   .catch(console.error);
-
+//const modalIsOpened = (".modal_is-opened")
 const editProfileBtn = document.querySelector(".profile__button-edit");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
@@ -109,7 +109,21 @@ const editAvatarCloseButton =
 const profileAvatarInput = editAvatarModal.querySelector(
   "#profile-avatar-input"
 );
+const modalDelete = document.querySelector("#modal-delete");
+const modalContainerDelete = modalDelete.querySelectorAll(
+  ".modal__container-delete"
+);
+const deleteCloseButton = modalContainerDelete.querySelectorAll(
+  ".modal__close-btn-delete"
+);
+const deleteButton = modalDelete.querySelectorAll(".modal__delete-btn");
+const cancelButton = modalDelete.querySelectorAll(".modal__cancel-btn");
 //const
+function openModal(modal) {
+  modal.classList.add("modal_is-opened");
+  document.addEventListener("keydown", handleEscapeKey);
+}
+
 function getCard(data) {
   const card = cardTemplate.cloneNode(true);
   const cardText = card.querySelector(".card__title");
@@ -126,8 +140,7 @@ function getCard(data) {
 
   const cardButtonDelete = card.querySelector(".card__button-delete");
   cardButtonDelete.addEventListener("click", function () {
-    cardButtonDelete.closest(".card").remove();
-    let card = null;
+    openModal(modalDelete);
   });
 
   cardImage.addEventListener("click", function () {
@@ -143,11 +156,6 @@ function getCard(data) {
 function renderCard(data) {
   const card = getCard(data);
   cards.append(card);
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_is-opened");
-  document.addEventListener("keydown", handleEscapeKey);
 }
 
 function closeModal(modal) {

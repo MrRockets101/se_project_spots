@@ -46,6 +46,17 @@ class Api {
       }),
     }).then(this._handleServerResponse);
   }
+  newPost(name, link) {
+    return fetch(`${this._baseUrl}//cards`, {
+      method: "POST",
+      headers: this._headers,
+
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._handleServerResponse);
+  }
 }
 
 // GET https://around-api.en.tripleten-services.com/v1/users/me // also remember to pass the token

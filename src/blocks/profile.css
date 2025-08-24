@@ -14,7 +14,7 @@
   display: flex;
 }
 .profile__avatar-button {
-  background: none;
+  background-color: transparent;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -121,10 +121,25 @@
     padding-top: 20px;
     margin-top: 0px;
   }
-
+  .profile__avatar-container {
+    position: relative;
+    display: flex;
+    max-width: 80px;
+    max-height: 80px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+  }
   .profile__avatar-button {
     visibility: visible;
     border: none;
+    bottom: 10px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
   }
 
   .profile__avatar-button::after {

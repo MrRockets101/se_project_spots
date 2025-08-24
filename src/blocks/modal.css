@@ -195,6 +195,10 @@
   background-position: center;
   background-image: url("../images/close-icon.png");
 }
+
+.modal__close-btn-delete:hover {
+  cursor: pointer;
+}
 .modal__cancel-btn {
   border-radius: 8px;
   border-color: #212121;
