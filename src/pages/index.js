@@ -96,6 +96,7 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 const cards = document.querySelector(".cards");
+const card = cards.querySelector(".card");
 const modalPreview = document.querySelector("#modal-preview");
 const modalImageContainer = modalPreview.querySelector(
   ".modal__image-container"
@@ -114,12 +115,12 @@ const modalDelete = document.querySelector("#modal-delete");
 const modalContainerDelete = modalDelete.querySelectorAll(
   ".modal__container-delete"
 );
-const cardButtonLike = card.querySelector(".card__button-like");
+
 let cardButtonLiked = ".card__button-like_clicked";
-const deleteCloseButton = document.querySelectorAll(".modal__close-btn-delete");
-const deleteButton = modalDelete.querySelectorAll(".modal__delete-btn");
-const cancelButton = modalDelete.querySelectorAll(".modal__cancel-btn");
-const cardButtonDelete = document.querySelectorAll(".card__button-delete");
+const deleteCloseButton = document.querySelector(".modal__close-btn-delete");
+const deleteButton = modalDelete.querySelector(".modal__delete-btn");
+const cancelButton = modalDelete.querySelector(".modal__cancel-btn");
+
 let selectedCard;
 let selectedCardId;
 
@@ -141,6 +142,7 @@ function getCard(data) {
   const card = cardTemplate.cloneNode(true);
   const cardText = card.querySelector(".card__title");
   const cardImage = card.querySelector(".card__image");
+  const cardButtonDelete = card.querySelector(".card__button-delete");
 
   cardImage.src = data.link;
   cardImage.alt = data.name;
@@ -152,22 +154,22 @@ function getCard(data) {
     previewImage.alt = data.name;
     modalTitlePreview.textContent = data.name;
   });
-
+  cardButtonDelete.addEventListener("click", () => {
+    handleDeleteCard(card, data._id);
+  });
   cardImage.addEventListener("click", () => handleImageClick(data));
-
+  const cardButtonLike = card.querySelector(".card__button-like");
   // not sure how to parse this, help here
-  if ({ isLiked: true }.then(handleLike));
+  if (data.isLiked) {
+    cardButtonLike.classList.add(cardButtonLiked);
+  }
+  cardButtonLike.addEventListener("click", (evt) => handleLike(evt, data._id));
 
   return card;
 }
 
-cardButtonLike.addEventListener("click", (evt) => handleLike(evt, data._id));
-cardButtonDelete.addEventListener("click", () => {
-  handleDeleteCard;
-});
-
 function handleDeleteSubmit() {
-  const buttonSubmit = evt.submitter;
+  const deleteButton = evt.submitter;
   setButtonText(button, false, "Delete", "Deleting...");
   evt.preventDefault();
   api
@@ -199,19 +201,11 @@ function handleEscapeKey(event) {
   }
 }
 
-cardButtonDelete.addEventListener("click", () => {
-  openModal(modalDelete);
-});
-
 function handleDeleteCard(card, cardId) {
   selectedCard = card;
   selectedCardId = cardId;
   openModal(modalDelete);
 }
-
-deleteButton.addEventListener("click", () => {
-  openModal(modalDelete);
-});
 
 modalClosePreview.addEventListener("click", () => {
   closeModal(modalPreview);
@@ -283,7 +277,7 @@ editAvatarCloseButton.addEventListener("click", () => {
   closeModal(editAvatarModal);
 });
 deleteCloseButton.addEventListener("click", () => {
-  closeModal(editAvatarModal);
+  closeModal(modalDelete);
 });
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
