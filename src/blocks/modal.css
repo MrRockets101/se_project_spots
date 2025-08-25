@@ -166,7 +166,7 @@
   justify-content: center;
   padding-top: 32px;
 }
-.modal__delete-btn {
+.modal__submit_delete-btn {
   background-color: #ff6565;
   border-radius: 8px;
   width: 156px;
@@ -207,7 +207,7 @@
   background-color: #ffffff;
 }
 
-.modal__delete-btn:hover {
+.modal__submit_delete-btn:hover {
   background: #ff3333;
   cursor: pointer;
 }

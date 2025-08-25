@@ -118,7 +118,7 @@ const modalContainerDelete = modalDelete.querySelectorAll(
 
 let cardButtonLiked = ".card__button-like_clicked";
 const deleteCloseButton = document.querySelector(".modal__close-btn-delete");
-const deleteButton = modalDelete.querySelector(".modal__delete-btn");
+const deleteButton = modalDelete.querySelector(".modal__submit_delete-btn");
 const cancelButton = modalDelete.querySelector(".modal__cancel-btn");
 
 let selectedCard;
