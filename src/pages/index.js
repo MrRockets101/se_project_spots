@@ -4,6 +4,7 @@ import {
   settings,
   validationReset,
   buttonDisabled,
+  toggleButtonState,
 } from "../scripts/validation.js";
 
 import Api from "../utils/Api.js";
@@ -134,8 +135,9 @@ function openModal(modal) {
 }
 function handleLike(evt, id) {
   //evt.target.classList.toggle("card__button-like_clicked");};
-  classList.contains(cardButtonLiked, cardButtonLike);
-  handleLikeStatus(id, isLiked)
+  //classList.contains(cardButtonLiked, cardButtonLike);
+  api
+    .handleLikedStatus(id, isLiked)
     .then(toggle(cardButtonLiked, cardButtonLike))
     .catch(console.error);
   // not sure if correct, help here
@@ -166,7 +168,14 @@ function getCard(data) {
   if (data.isLiked) {
     cardButtonLike.classList.add(cardButtonLiked);
   }
-  cardButtonLike.addEventListener("click", (evt) => handleLike(evt, data._id));
+  cardButtonLike.addEventListener("click", (evt) => {
+    api
+      .handleLikedStatus(id, isLiked)
+      .then(() => {
+        cardButtonLike.classList.toggle(cardButtonLiked);
+      })
+      .catch(console.error);
+  });
 
   return card;
 }
@@ -315,14 +324,21 @@ function handleAddCardSubmit(evt) {
       link: newPostInput.value,
       name: newPostCaption.value,
     })
+    .then((newCard) => {
+      renderCard(newCard);
+      evt.target.reset();
+      toggleButtonState(
+        [newPostInput, newPostCaption],
+        evt.submitter,
+        settings
+      );
+      closeModal(newPostModal);
+    })
 
     .catch(console.error)
     .finally(() => {
       setButtonText(buttonSubmit, false);
     });
-  renderCard(newPostValues);
-  evt.target.reset();
-  toggleButtonState([newPostInput, newPostCaption], evt.submitter, settings);
 }
 editAvatarModal.addEventListener("submit", handleAvatarSubmit);
 
