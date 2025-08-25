@@ -289,12 +289,12 @@ function handleAvatarSubmit(evt) {
     .editAvatarInfo(profileAvatarInput.value)
     .then((data) => {
       console.log(data);
-      profileAvatarInput.src = data.link;
+      profileAvatarInput.src = profileAvatarInput.textContent;
     })
     // not sure if this is correct, need help here
     .catch(console.error)
     .finally(() => {
-      setButtonText(button, false);
+      setButtonText(button, true);
     });
 }
 
