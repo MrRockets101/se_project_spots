@@ -46,7 +46,7 @@ class Api {
       }),
     }).then(this._handleServerResponse);
   }
-  newPost(name, link) {
+  addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -60,6 +60,12 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/{id}`, {
       method: "DELETE",
+      headers: this._headers,
+    }).then(this._handleServerResponse);
+  }
+  handleLikedStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/likes`, {
+      method: isLiked ? "DELETE" : "put",
       headers: this._headers,
     }).then(this._handleServerResponse);
   }

@@ -7,6 +7,7 @@ import {
 
 import Api from "../utils/Api.js";
 import { data } from "autoprefixer";
+import { setButtonText } from "../utils/helper.js";
 
 // const initialCards = [
 //   {
@@ -113,6 +114,8 @@ const modalDelete = document.querySelector("#modal-delete");
 const modalContainerDelete = modalDelete.querySelectorAll(
   ".modal__container-delete"
 );
+const cardButtonLike = card.querySelector(".card__button-like");
+let cardButtonLiked = ".card__button-like_clicked";
 const deleteCloseButton = document.querySelectorAll(".modal__close-btn-delete");
 const deleteButton = modalDelete.querySelectorAll(".modal__delete-btn");
 const cancelButton = modalDelete.querySelectorAll(".modal__cancel-btn");
@@ -125,6 +128,14 @@ function openModal(modal) {
   modal.classList.add("modal_is-opened");
   document.addEventListener("keydown", handleEscapeKey);
 }
+function handleLike(evt, id) {
+  //evt.target.classList.toggle("card__button-like_clicked");};
+  classList.contains(cardButtonLiked, cardButtonLike);
+  handleLikeStatus(id, isLiked)
+    .then(toggle(cardButtonLiked, cardButtonLike))
+    .catch(console.error);
+  // not sure if correct, help here
+}
 
 function getCard(data) {
   const card = cardTemplate.cloneNode(true);
@@ -135,18 +146,6 @@ function getCard(data) {
   cardImage.alt = data.name;
   cardText.textContent = data.name;
 
-  const cardButtonLike = card.querySelector(".card__button-like");
-
-  function handleDeleteCard(card, cardId) {
-    selectedCard = card;
-    selectedCardId = cardId;
-    openModal(modalDelete);
-  }
-
-  cardButtonLike.addEventListener("click", () => {
-    cardButtonLike.classList.toggle("card__button-like_clicked");
-  });
-
   cardImage.addEventListener("click", () => {
     openModal(modalPreview);
     previewImage.src = data.link;
@@ -156,10 +155,20 @@ function getCard(data) {
 
   cardImage.addEventListener("click", () => handleImageClick(data));
 
+  // not sure how to parse this, help here
+  isLiked = true.then(handleLike);
+
   return card;
 }
 
+cardButtonLike.addEventListener("click", (evt) => handleLike(evt, data._id));
+cardButtonDelete.addEventListener("click", () => {
+  handleDeleteCard;
+});
+
 function handleDeleteSubmit() {
+  const buttonSubmit = evt.submitter;
+  setButtonText(button, false, "Delete", "Deleting...");
   evt.preventDefault();
   api
     .deleteCard(selectedCardId)
@@ -167,7 +176,10 @@ function handleDeleteSubmit() {
       cardButtonDelete.closest(".card").remove();
       let card = null;
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(button, false, "Delete", "Deleting...");
+    });
 }
 
 function renderCard(data) {
@@ -186,16 +198,21 @@ function handleEscapeKey(event) {
     closeModal(openedModal);
   }
 }
-// need help here
+
 cardButtonDelete.addEventListener("click", () => {
   openModal(modalDelete);
 });
-deleteButton.addEventListener("click", (evt) => {
-  handleDeleteCard(card, data._id)
-  .buttonDisabled(buttonSubmit, settings),
-  .then(deleteButton.textContent = "Deleting..."),
-  .closeModal(modalDelete)
+
+function handleDeleteCard(card, cardId) {
+  selectedCard = card;
+  selectedCardId = cardId;
+  openModal(modalDelete);
+}
+
+deleteButton.addEventListener("click", () => {
+  openModal(modalDelete);
 });
+
 modalClosePreview.addEventListener("click", () => {
   closeModal(modalPreview);
   document.removeEventListener("keydown", handleEscapeKey);
@@ -236,6 +253,8 @@ editProfileCloseBtn.addEventListener("click", () => {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  const buttonSubmit = evt.submitter;
+  setButtonText(button, true);
   api
     .editUserInfo({
       name: editProfileNameInput,
@@ -248,7 +267,10 @@ function handleProfileFormSubmit(evt) {
       buttonDisabled(buttonSubmit, settings);
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(button, false);
+    });
 }
 
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
@@ -265,6 +287,9 @@ deleteCloseButton.addEventListener("click", () => {
 });
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+  const buttonSubmit = evt.submitter;
+  setButtonText(button, true);
+
   console.log(profileAvatarInput.value);
   api
     .editAvatarInfo(profileAvatarInput.value)
@@ -273,22 +298,34 @@ function handleAvatarSubmit(evt) {
       profileAvatarInput.src = data.link;
     })
     // not sure if this is correct, need help here
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(button, false);
+    });
 }
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
 
-  const newPostValues = {
-    link: newPostInput.value,
-    name: newPostCaption.value,
-  };
+  const buttonSubmit = evt.submitter;
+  setButtonText(button, true);
 
+  api
+    .addCard({
+      link: newPostInput.value,
+      name: newPostCaption.value,
+    })
+
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(button, false);
+    });
   renderCard(newPostValues);
   evt.target.reset();
   toggleButtonState([newPostInput, newPostCaption], evt.submitter, settings);
 }
 editAvatarModal.addEventListener("submit", handleAvatarSubmit);
+
 newPostForm.addEventListener("submit", handleAddCardSubmit);
 modalDelete.addEventListener("submit", handleDeleteSubmit);
 enableValidation(settings);
