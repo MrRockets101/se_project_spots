@@ -156,7 +156,7 @@ function getCard(data) {
   cardImage.addEventListener("click", () => handleImageClick(data));
 
   // not sure how to parse this, help here
-  isLiked = true.then(handleLike);
+  if ({ isLiked: true }.then(handleLike));
 
   return card;
 }
