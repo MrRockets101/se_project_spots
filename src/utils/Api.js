@@ -47,7 +47,7 @@ class Api {
     }).then(this._handleServerResponse);
   }
   newPost(name, link) {
-    return fetch(`${this._baseUrl}//cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
 
@@ -55,6 +55,12 @@ class Api {
         name,
         link,
       }),
+    }).then(this._handleServerResponse);
+  }
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/{id}`, {
+      method: "DELETE",
+      headers: this._headers,
     }).then(this._handleServerResponse);
   }
 }

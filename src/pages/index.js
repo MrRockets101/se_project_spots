@@ -70,7 +70,7 @@ api
     profileDescription.textContent = UserInfo.about;
   })
   .catch(console.error);
-//const modalIsOpened = (".modal_is-opened")
+
 const editProfileBtn = document.querySelector(".profile__button-edit");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
@@ -118,6 +118,9 @@ const deleteCloseButton = modalContainerDelete.querySelectorAll(
 );
 const deleteButton = modalDelete.querySelectorAll(".modal__delete-btn");
 const cancelButton = modalDelete.querySelectorAll(".modal__cancel-btn");
+const selectedCard;
+const selectedCardId;
+
 //const
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
@@ -134,6 +137,13 @@ function getCard(data) {
   cardText.textContent = data.name;
 
   const cardButtonLike = card.querySelector(".card__button-like");
+
+  function handleDeleteCard(card, cardId) {
+    selectedCard = card;
+    selectedCardId = cardId;
+    openModal(modalDelete);
+  }
+
   cardButtonLike.addEventListener("click", function () {
     cardButtonLike.classList.toggle("card__button-like_clicked");
   });
@@ -150,8 +160,23 @@ function getCard(data) {
     modalTitlePreview.textContent = data.name;
   });
 
+   deleteButton.addEventListener("click", (evt) => handleDeleteCard(card, data._id ));
+   cardImage.addEventListener("click", ()=> handleImageClick(data));
+
   return card;
 }
+
+function handleDeleteSubmit() {
+  evt.preventDefault();
+  api
+  .deleteCard(selectedCardId)
+  .then(()  => {
+     cardButtonDelete.closest(".card").remove();
+    let card = null;})
+    .catch(console.error);
+
+};
+
 
 function renderCard(data) {
   const card = getCard(data);
@@ -261,5 +286,5 @@ function handleAddCardSubmit(evt) {
 }
 
 newPostForm.addEventListener("submit", handleAddCardSubmit);
-
+modalDelete.addEventListener("submit", handleDeleteSubmit);
 enableValidation(settings);
