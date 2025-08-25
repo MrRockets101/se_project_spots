@@ -33,7 +33,7 @@ const hasInvalidInput = (formInput) => {
     return !inputContent.validity.valid;
   });
 };
-const buttonDisabled = (buttonSubmit, config) => {
+export const buttonDisabled = (buttonSubmit, config) => {
   buttonSubmit.disabled = true;
   buttonSubmit.classList.add(config.inactiveButtonClass);
 };
@@ -47,6 +47,7 @@ const toggleButtonState = (formInput, buttonSubmit, config) => {
 };
 
 export const validationReset = (form, formInput, config) => {
+  const buttonSubmit = form.querySelector(config.submitButtonSelector);
   formInput.forEach((input) => {
     hideInputError(form, input, config);
   });

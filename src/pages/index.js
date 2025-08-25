@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   validationReset,
+  buttonDisabled,
 } from "../scripts/validation.js";
 
 import Api from "../utils/Api.js";
@@ -111,7 +112,9 @@ const editAvatarCloseButton =
 const profileAvatarInput = editAvatarModal.querySelector(
   "#profile-avatar-input"
 );
+
 const modalDelete = document.querySelector("#modal-delete");
+const formDelete = modalDelete.querySelector(".modal__delete-form-container");
 const modalContainerDelete = modalDelete.querySelectorAll(
   ".modal__container-delete"
 );
@@ -168,19 +171,21 @@ function getCard(data) {
   return card;
 }
 
-function handleDeleteSubmit() {
-  const deleteButton = evt.submitter;
-  setButtonText(button, false, "Delete", "Deleting...");
+function handleDeleteSubmit(evt) {
   evt.preventDefault();
+  const deleteButton = evt.submitter;
+  setButtonText(deleteButton, true, "Delete", "Deleting...");
+
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      cardButtonDelete.closest(".card").remove();
+      selectedCard.remove();
       let card = null;
+      closeModal(modalDelete);
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(button, false, "Delete", "Deleting...");
+      setButtonText(deleteButton, false, "Delete", "Deleting...");
     });
 }
 
@@ -235,10 +240,11 @@ editProfileBtn.addEventListener("click", () => {
   openModal(editProfileModal);
   editProfileDescriptionInput.value = profileDescription.textContent;
   editProfileNameInput.value = profileName.textContent;
-  validationReset(editProfileForm, [
-    editProfileNameInput,
-    editProfileDescriptionInput,
-  ]);
+  validationReset(
+    editProfileForm,
+    [editProfileNameInput, editProfileDescriptionInput],
+    settings
+  );
 });
 
 editProfileCloseBtn.addEventListener("click", () => {
@@ -248,11 +254,11 @@ editProfileCloseBtn.addEventListener("click", () => {
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   const buttonSubmit = evt.submitter;
-  setButtonText(button, true);
+  setButtonText(buttonSubmit, true);
   api
     .editUserInfo({
-      name: editProfileNameInput,
-      about: editProfileDescriptionInput,
+      name: editProfileNameInput.value,
+      about: editProfileDescriptionInput.value,
     })
     .then((data) => {
       profileName.textContent = editProfileNameInput.value;
@@ -263,7 +269,7 @@ function handleProfileFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(button, false);
+      setButtonText(buttonSubmit, false);
     });
 }
 
@@ -282,7 +288,7 @@ deleteCloseButton.addEventListener("click", () => {
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const buttonSubmit = evt.submitter;
-  setButtonText(button, true);
+  setButtonText(buttonSubmit, true);
 
   console.log(profileAvatarInput.value);
   api
@@ -294,7 +300,7 @@ function handleAvatarSubmit(evt) {
     // not sure if this is correct, need help here
     .catch(console.error)
     .finally(() => {
-      setButtonText(button, true);
+      setButtonText(buttonSubmit, true);
     });
 }
 
@@ -302,7 +308,7 @@ function handleAddCardSubmit(evt) {
   evt.preventDefault();
 
   const buttonSubmit = evt.submitter;
-  setButtonText(button, true);
+  setButtonText(buttonSubmit, true);
 
   api
     .addCard({
@@ -312,7 +318,7 @@ function handleAddCardSubmit(evt) {
 
     .catch(console.error)
     .finally(() => {
-      setButtonText(button, false);
+      setButtonText(buttonSubmit, false);
     });
   renderCard(newPostValues);
   evt.target.reset();
@@ -321,5 +327,5 @@ function handleAddCardSubmit(evt) {
 editAvatarModal.addEventListener("submit", handleAvatarSubmit);
 
 newPostForm.addEventListener("submit", handleAddCardSubmit);
-modalDelete.addEventListener("submit", handleDeleteSubmit);
+formDelete.addEventListener("submit", handleDeleteSubmit);
 enableValidation(settings);
