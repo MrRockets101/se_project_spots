@@ -64,8 +64,8 @@ class Api {
     }).then(this._handleServerResponse);
   }
   handleLikedStatus(id, isLiked) {
-    return fetch(`${this._baseUrl}/likes`, {
-      method: isLiked ? "DELETE" : "put",
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
     }).then(this._handleServerResponse);
   }

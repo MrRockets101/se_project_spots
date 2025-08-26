@@ -120,7 +120,7 @@ const modalContainerDelete = modalDelete.querySelectorAll(
   ".modal__container-delete"
 );
 
-let cardButtonLiked = ".card__button-like_clicked";
+let cardButtonLiked = "card__button-like_clicked";
 const deleteCloseButton = document.querySelector(".modal__close-btn-delete");
 const deleteButton = modalDelete.querySelector(".modal__submit_delete-btn");
 const cancelButton = modalDelete.querySelector(".modal__cancel-btn");
@@ -133,14 +133,27 @@ function openModal(modal) {
   modal.classList.add("modal_is-opened");
   document.addEventListener("keydown", handleEscapeKey);
 }
+
+//function handleLikeClick (() => { classList.contains(cardButtonLiked, cardButtonLike)
+
+//  evt.target.classList.toggle(cardButtonLiked, cardButtonLike)} );
+//;}
 function handleLike(evt, id) {
-  //evt.target.classList.toggle("card__button-like_clicked");};
-  //classList.contains(cardButtonLiked, cardButtonLike);
   api
     .handleLikedStatus(id, isLiked)
     .then(toggle(cardButtonLiked, cardButtonLike))
     .catch(console.error);
   // not sure if correct, help here
+}
+//cardButtonLike.addEventListener("click", () => {
+//handleLike;
+//});
+
+function handleImageClick(data) {
+  previewImage.src = data.link;
+  previewImage.alt = data.name;
+  modalTitlePreview.textContent = data.name;
+  openModal(modalPreview);
 }
 
 function getCard(data) {
@@ -153,24 +166,19 @@ function getCard(data) {
   cardImage.alt = data.name;
   cardText.textContent = data.name;
 
-  cardImage.addEventListener("click", () => {
-    openModal(modalPreview);
-    previewImage.src = data.link;
-    previewImage.alt = data.name;
-    modalTitlePreview.textContent = data.name;
-  });
   cardButtonDelete.addEventListener("click", () => {
     handleDeleteCard(card, data._id);
   });
   cardImage.addEventListener("click", () => handleImageClick(data));
-  const cardButtonLike = card.querySelector(".card__button-like");
+
   // not sure how to parse this, help here
+  const cardButtonLike = card.querySelector(".card__button-like");
   if (data.isLiked) {
     cardButtonLike.classList.add(cardButtonLiked);
   }
   cardButtonLike.addEventListener("click", (evt) => {
     api
-      .handleLikedStatus(id, isLiked)
+      .handleLikedStatus(data._id, data.isLiked)
       .then(() => {
         cardButtonLike.classList.toggle(cardButtonLiked);
       })
