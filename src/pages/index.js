@@ -71,6 +71,7 @@ api
     });
     profileName.textContent = UserInfo.name;
     profileDescription.textContent = UserInfo.about;
+    profileAvatar.src = UserInfo.avatar;
   })
   .catch(console.error);
 
@@ -312,12 +313,12 @@ function handleAvatarSubmit(evt) {
     .editAvatarInfo(profileAvatarInput.value)
     .then((data) => {
       console.log(data);
-      profileAvatarInput.src = profileAvatarInput.textContent;
+      profileAvatarInput.src = data.avatar;
     })
     // not sure if this is correct, need help here
     .catch(console.error)
     .finally(() => {
-      setButtonText(buttonSubmit, true);
+      setButtonText(buttonSubmit, false);
     });
 }
 
