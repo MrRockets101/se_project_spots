@@ -27,11 +27,19 @@
       </header>
       <main class="content">
         <section class="profile page__content">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="picture of avatar"
-          />
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-button">
+              <img
+                class="profile__avatar-edit"
+                src="<%=require('./images/edit-avatar-button.png')%>"
+              />
+            </button>
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/avatar.jpg')%>"
+              alt="picture of avatar"
+            />
+          </div>
           <div class="profile__content">
             <div class="profile__avatar-main">
               <h2 class="profile__title">Bessie Coleman</h2>
@@ -125,7 +133,6 @@
                 class="modal__input"
                 placeholder="Paste a link to the picture"
                 minlength="2"
-                maxlength="30"
                 type="url"
                 required
               />
@@ -140,7 +147,7 @@
                 class="modal__input"
                 placeholder="Type your caption"
                 minlength="2"
-                maxlength="30"
+                maxlength="40"
                 required
               />
               <span id="card-caption-input-error" class="modal__error"></span>
@@ -155,6 +162,53 @@
           <button class="model__close-btn modal__close_preview"></button>
           <img class="modal__image" id="preview__image" src="#" alt="" />
           <h3 class="modal__title-preview"></h3>
+        </div>
+      </div>
+      <div class="modal" id="edit-avatar-modal">
+        <div class="modal__container">
+          <div class="modal__header">
+            <h2 class="modal__title">Edit avatar</h2>
+            <button class="modal__close-btn"></button>
+          </div>
+          <form class="modal__form" novalidate>
+            <label for="profile-avatar-input" class="modal__label"
+              >Avatar
+              <input
+                id="profile-avatar-input"
+                name="avatar"
+                class="modal__input"
+                placeholder="avatar goes here"
+                required
+              />
+              <span id="profile-avatar-input-error" class="modal__error"></span>
+            </label>
+
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal" id="modal-delete">
+        <div class="modal__container modal__container-delete">
+          <div>
+            <h2 class="modal__title-delete">
+              Are you sure you want to delete this image?
+            </h2>
+            <button class="modal__close-btn-delete"></button>
+          </div>
+          <form
+            class="modal__form modal__delete-form-container"
+            novalidate
+            id="delete-form"
+          >
+            <button
+              type="submit"
+              class="modal__submit-btn modal__submit_delete-btn"
+            >
+              Delete
+            </button>
+            <button type="button" class="modal__cancel-btn">Cancel</button>
+          </form>
         </div>
       </div>
     </div>
