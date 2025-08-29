@@ -54,27 +54,6 @@ import { setButtonText } from "../utils/helper.js";
 //  { name: "new post button" , "./images/post-button.svg" },
 //];
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "11a9d136-cc58-4622-9544-b00018e1733c",
-    "Content-Type": "application/json",
-  },
-});
-
-api
-  .getAppInfo()
-  .then(([arrayCards, UserInfo]) => {
-    console.log(arrayCards, UserInfo);
-    arrayCards.forEach((item) => {
-      renderCard(item);
-    });
-    profileName.textContent = UserInfo.name;
-    profileDescription.textContent = UserInfo.about;
-    profileAvatar.src = UserInfo.avatar;
-  })
-  .catch(console.error);
-
 const editProfileBtn = document.querySelector(".profile__button-edit");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
@@ -125,9 +104,29 @@ let cardButtonLiked = "card__button-like_clicked";
 const deleteCloseButton = document.querySelector(".modal__close-btn-delete");
 const deleteButton = modalDelete.querySelector(".modal__submit_delete-btn");
 const cancelButton = modalDelete.querySelector(".modal__cancel-btn");
-
+const profileAvatar = document.querySelector(".profile__avatar");
 let selectedCard;
 let selectedCardId;
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "11a9d136-cc58-4622-9544-b00018e1733c",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getAppInfo()
+  .then(([arrayCards, UserInfo]) => {
+    console.log(arrayCards, UserInfo);
+    arrayCards.forEach((item) => {
+      renderCard(item);
+    });
+    profileName.textContent = UserInfo.name;
+    profileDescription.textContent = UserInfo.about;
+    profileAvatar.src = UserInfo.avatar;
+  })
+  .catch(console.error);
 
 //const
 function openModal(modal) {
